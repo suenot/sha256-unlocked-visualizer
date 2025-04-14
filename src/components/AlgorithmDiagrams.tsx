@@ -1,8 +1,25 @@
 import { Code } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import mermaid from 'mermaid';
 
 const AlgorithmDiagrams = () => {
+  const mermaidRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Initialize mermaid with configuration
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: 'default',
+      securityLevel: 'loose',
+      fontFamily: 'sans-serif',
+    });
+    
+    // Render all diagrams
+    mermaid.run();
+  }, []);
+
   return (
-    <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg space-y-8">
+    <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg space-y-8" ref={mermaidRef}>
       <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
         <Code className="h-5 w-5" />
         SHA-256 Algorithm Flow
