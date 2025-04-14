@@ -1,4 +1,3 @@
-
 import { bytesToBinary, stringToUTF8Bytes } from './bitOperations';
 
 // SHA-256 Constants
@@ -80,7 +79,7 @@ export function sha256(message: string): string {
     .join('');
 }
 
-function createMessageSchedule(block: number[]): number[] {
+export function createMessageSchedule(block: number[]): number[] {
   const w = new Array(64).fill(0);
   
   // First 16 words are the 512-bit block split into 32-bit chunks
