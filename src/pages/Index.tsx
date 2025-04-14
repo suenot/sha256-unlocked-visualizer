@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { sha256, H_CONSTANTS, K_CONSTANTS } from '@/utils/sha256';
 import { bytesToBinary, hexToBinary, numberToHex } from '@/utils/bitOperations';
@@ -7,6 +6,7 @@ import PreprocessingVisualizer from '@/components/PreprocessingVisualizer';
 import MessageScheduleVisualizer from '@/components/MessageScheduleVisualizer';
 import CompressionVisualizer from '@/components/CompressionVisualizer';
 import HashComparisonVisualizer from '@/components/HashComparisonVisualizer';
+import AlgorithmDiagrams from '@/components/AlgorithmDiagrams';
 
 const SHA256Visualizer = () => {
   const [input, setInput] = useState('');
@@ -127,6 +127,12 @@ const SHA256Visualizer = () => {
             >
               Constants
             </button>
+            <button
+              className={`py-2 px-3 md:px-4 ${activeTab === 'diagrams' ? 'border-b-2 border-blue-500 font-bold' : 'text-gray-500 dark:text-gray-400'}`}
+              onClick={() => setActiveTab('diagrams')}
+            >
+              Diagrams
+            </button>
           </nav>
         </div>
         
@@ -207,6 +213,10 @@ const SHA256Visualizer = () => {
                 </div>
               </div>
             </div>
+          )}
+          
+          {activeTab === 'diagrams' && (
+            <AlgorithmDiagrams />
           )}
           
           {activeTab !== 'overview' && activeTab !== 'compression' && activeTab !== 'comparison' && !input && (
