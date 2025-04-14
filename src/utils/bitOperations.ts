@@ -1,4 +1,3 @@
-
 export function stringToUTF8Bytes(str: string): number[] {
   const encoder = new TextEncoder();
   return Array.from(encoder.encode(str));
@@ -15,6 +14,10 @@ export function hexToBinary(hex: string): string {
     .split('')
     .map(c => parseInt(c, 16).toString(2).padStart(4, '0'))
     .join(' ');
+}
+
+export function bytesToHex(bytes: number[]): string {
+  return bytes.map(byte => byte.toString(16).padStart(2, '0')).join('');
 }
 
 export function visualizePadding(message: string): {
