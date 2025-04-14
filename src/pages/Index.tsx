@@ -6,6 +6,7 @@ import { Textarea } from "@/components/ui/textarea";
 import PreprocessingVisualizer from '@/components/PreprocessingVisualizer';
 import MessageScheduleVisualizer from '@/components/MessageScheduleVisualizer';
 import CompressionVisualizer from '@/components/CompressionVisualizer';
+import HashComparisonVisualizer from '@/components/HashComparisonVisualizer';
 
 const SHA256Visualizer = () => {
   const [input, setInput] = useState('');
@@ -89,33 +90,39 @@ const SHA256Visualizer = () => {
         <h2 className="text-2xl mb-6">SHA-256 Algorithm Visualization</h2>
         
         <div className="border-b border-gray-200 dark:border-gray-700">
-          <nav className="flex space-x-4">
+          <nav className="flex flex-wrap space-x-2 md:space-x-4">
             <button
-              className={`py-2 px-4 ${activeTab === 'overview' ? 'border-b-2 border-blue-500 font-bold' : 'text-gray-500 dark:text-gray-400'}`}
+              className={`py-2 px-3 md:px-4 ${activeTab === 'overview' ? 'border-b-2 border-blue-500 font-bold' : 'text-gray-500 dark:text-gray-400'}`}
               onClick={() => setActiveTab('overview')}
             >
               Overview
             </button>
             <button
-              className={`py-2 px-4 ${activeTab === 'preprocessing' ? 'border-b-2 border-blue-500 font-bold' : 'text-gray-500 dark:text-gray-400'}`}
+              className={`py-2 px-3 md:px-4 ${activeTab === 'preprocessing' ? 'border-b-2 border-blue-500 font-bold' : 'text-gray-500 dark:text-gray-400'}`}
               onClick={() => setActiveTab('preprocessing')}
             >
               1. Preprocessing
             </button>
             <button
-              className={`py-2 px-4 ${activeTab === 'schedule' ? 'border-b-2 border-blue-500 font-bold' : 'text-gray-500 dark:text-gray-400'}`}
+              className={`py-2 px-3 md:px-4 ${activeTab === 'schedule' ? 'border-b-2 border-blue-500 font-bold' : 'text-gray-500 dark:text-gray-400'}`}
               onClick={() => setActiveTab('schedule')}
             >
               2. Message Schedule
             </button>
             <button
-              className={`py-2 px-4 ${activeTab === 'compression' ? 'border-b-2 border-blue-500 font-bold' : 'text-gray-500 dark:text-gray-400'}`}
+              className={`py-2 px-3 md:px-4 ${activeTab === 'compression' ? 'border-b-2 border-blue-500 font-bold' : 'text-gray-500 dark:text-gray-400'}`}
               onClick={() => setActiveTab('compression')}
             >
               3. Compression
             </button>
             <button
-              className={`py-2 px-4 ${activeTab === 'constants' ? 'border-b-2 border-blue-500 font-bold' : 'text-gray-500 dark:text-gray-400'}`}
+              className={`py-2 px-3 md:px-4 ${activeTab === 'comparison' ? 'border-b-2 border-blue-500 font-bold' : 'text-gray-500 dark:text-gray-400'}`}
+              onClick={() => setActiveTab('comparison')}
+            >
+              Hash Comparison
+            </button>
+            <button
+              className={`py-2 px-3 md:px-4 ${activeTab === 'constants' ? 'border-b-2 border-blue-500 font-bold' : 'text-gray-500 dark:text-gray-400'}`}
               onClick={() => setActiveTab('constants')}
             >
               Constants
@@ -163,6 +170,10 @@ const SHA256Visualizer = () => {
             <CompressionVisualizer />
           )}
           
+          {activeTab === 'comparison' && (
+            <HashComparisonVisualizer />
+          )}
+          
           {activeTab === 'constants' && (
             <div className="bg-gray-100 dark:bg-gray-800 p-6 rounded-lg">
               <h3 className="text-xl font-semibold mb-4">SHA-256 Constants</h3>
@@ -198,7 +209,7 @@ const SHA256Visualizer = () => {
             </div>
           )}
           
-          {activeTab !== 'overview' && !input && (
+          {activeTab !== 'overview' && activeTab !== 'compression' && activeTab !== 'comparison' && !input && (
             <div className="bg-yellow-50 dark:bg-yellow-900/30 p-6 rounded-lg border border-yellow-200 dark:border-yellow-800">
               <p className="text-yellow-800 dark:text-yellow-200">
                 Enter some text in the input field above to see the visualization.
